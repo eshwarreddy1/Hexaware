@@ -1,0 +1,10 @@
+package com.hexaware.ecom.service;
+
+import com.hexaware.ecom.entity.Customer;
+
+public interface ICustomerService {
+
+	boolean createCst(Customer cst);
+	boolean removecst(Customer cst);
+	
+}

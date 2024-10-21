@@ -1,0 +1,6 @@
+package com.hexaware.ecom.exceptions;
+
+public class ProductNotFoundException extends RuntimeException {
+
+	
+}

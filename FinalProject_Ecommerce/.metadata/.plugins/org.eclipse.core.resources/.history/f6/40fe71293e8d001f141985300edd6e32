@@ -1,0 +1,97 @@
+package com.hexaware.ecom.service;
+
+import java.util.List;
+
+
+import com.hexaware.ecom.dao.IOrderDao;
+import com.hexaware.ecom.dao.OrderDaoImp;
+import com.hexaware.ecom.entity.OrderItems;
+import com.hexaware.ecom.entity.Orders;
+import com.hexaware.ecom.entity.Product;
+
+public class OrderServiceImp implements IOrderService {
+
+	
+    private IOrderDao orderDao;
+    
+	public OrderServiceImp() {
+		
+		orderDao = new OrderDaoImp();	
+	}
+
+	
+	public  double calculateTotalPrice(Orders order, OrderItems orderItem) {
+	    double totalPrice = 0.0;
+
+	    // Fetch product price from the DAO layer
+	    double productPrice = OrderDaoImp.getProductPrice(orderItem.getProductId());
+
+	    // Multiply price by quantity
+	    totalPrice = productPrice * orderItem.getQuantity();
+
+	    // Set the total price in the Orders object
+	    order.setTotalPrice(totalPrice);
+
+	    return totalPrice;
+	}
+
+
+	@Override
+	public int addOrder(Orders order) {
+		
+		return orderDao.addOrder(order);
+	}
+	
+
+	@Override
+	public int addOrderItems(OrderItems orderItem) {
+		
+		return orderDao.addOrderItems(orderItem);
+	}
+
+	
+	
+ 
+	
+	/*
+	 * public static double calculateTotalPrice(Orders order, OrderItems orderItem,
+	 * List<Product> productList) { double totalPrice = 0.0;
+	 * 
+	 * 
+	 * 
+	 * System.out.println("Product List Size: " + productList.size()); for (Product
+	 * product : productList) {
+	 * 
+	 * System.out.println("total----- price "+totalPrice); if
+	 * (product.getProductId() == orderItem.getProductId()) {
+	 * System.out.println("total *****8 price "+totalPrice); totalPrice +=
+	 * product.getPrice() * orderItem.getQuantity();
+	 * System.out.println("total price "+totalPrice); break; } }
+	 * 
+	 * 
+	 * 
+	 * order.setTotalPrice(totalPrice);
+	 * 
+	 * return totalPrice; }
+	 */
+	
+	
+	public static  boolean validateOrder(OrderItems ordItm) {
+		
+		boolean flag = false;
+		if(ordItm.getQuantity()>0) {
+			flag = true;
+		}
+		return flag;
+	}
+
+
+	@Override
+	public List<Orders> getAllOrders(int customerId) {
+		
+		return orderDao.getAllOrders(customerId);
+	}
+
+	
+	
+}

@@ -1,0 +1,71 @@
+package com.hexaware.ecom.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.hexaware.ecom.entity.Product;
+
+public class ProductDaoImp implements IProductDao {
+
+	private Connection conn;
+	public ProductDaoImp() {
+		
+		conn=DBUtil.getDBConnection();
+	
+	}
+	
+	@Override
+	public boolean createPrd(Product prd) {
+		int count=0;
+		boolean check = false;
+		
+		String insert="insert into Products(product_Id,name,price,description,stockQuantity) values(?,?,?,?,?)";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(insert);
+			
+			pstmt.setInt(1, prd.getProductId());
+			pstmt.setString(2, prd.getName());
+			pstmt.setInt(3, prd.getPrice());
+			pstmt.setString(4, prd.getDescription());
+			pstmt.setInt(5, prd.getStockQuantity());
+			
+			count=pstmt.executeUpdate();
+			if(count>0) {
+				check = true;
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return check;
+	}
+	
+	@Override
+	public boolean removePrd(Product prd) {
+		int count=0;
+		boolean check = false;
+		
+		String delete="delete from Products where product_Id=?";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(delete);
+			
+			pstmt.setInt(1, prd.getProductId());
+			
+			count=pstmt.executeUpdate();
+			if(count>0) {
+				check = true;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return check;
+	}
+
+	
+}

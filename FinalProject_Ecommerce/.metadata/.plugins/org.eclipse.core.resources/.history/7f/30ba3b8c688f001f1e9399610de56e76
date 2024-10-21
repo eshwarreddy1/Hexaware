@@ -1,0 +1,10 @@
+package com.hexaware.ecom.service;
+
+import com.hexaware.ecom.entity.Product;
+
+public interface IProductService {
+
+	boolean createPrd(Product prd);
+	boolean removePrd(Product prd);
+	
+}

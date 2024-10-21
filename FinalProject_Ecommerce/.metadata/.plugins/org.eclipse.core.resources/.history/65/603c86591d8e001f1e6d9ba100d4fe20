@@ -1,0 +1,5 @@
+package com.hexaware.ecom.exceptions;
+
+public class OrderNotFoundException {
+
+}

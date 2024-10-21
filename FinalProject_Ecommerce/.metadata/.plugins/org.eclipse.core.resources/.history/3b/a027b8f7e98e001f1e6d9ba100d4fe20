@@ -1,0 +1,66 @@
+package com.hexaware.ecom.test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import com.hexaware.ecom.entity.Product;
+import com.hexaware.ecom.exceptions.ProductNotFoundException;
+import com.hexaware.ecom.service.IProductService;
+import com.hexaware.ecom.service.ProductServiceImp;
+
+class ProductServiceImpTest {
+
+    static IProductService productService;
+
+    @BeforeAll
+    public static void beforeAll() {
+        productService = new ProductServiceImp(); // Instantiate service
+    }
+
+    @Test
+    void testCreatePrdSuccess() {
+        // Arrange: Create a sample product
+        Product product = new Product(201, "Product1", 150, "Description", 10);
+
+        // Act: Call the service's createPrd method
+        boolean result = productService.createPrd(product);
+
+        // Assert: Check if the product was created successfully
+        assertTrue(result, "Product creation should be successful.");
+    }
+
+    @Test
+    void testRemovePrdSuccess() {
+        // Arrange: Create a sample product to remove
+        Product product = new Product(201, "Product2", 100, "Description", 5);
+
+        // Act: Call the service's removePrd method
+        boolean result = productService.removePrd(product);
+
+        // Assert: Check if the product was removed successfully
+        assertTrue(result, "Product removal should be successful.");
+    }
+
+    @Test
+    void testRemovePrdFailure() {
+        // Arrange: Create a sample product with a non-existent product ID
+        Product product = new Product(999, "InvalidProduct", 100, "Description", 5);
+
+        // Act: Try to remove a non-existent product and capture the result
+        boolean result = productService.removePrd(product);
+
+        // Assert: Check that the result is false (indicating failure to remove)
+        assertFalse(result, "Product removal should fail for a non-existent product.");
+
+        // Since an exception is not thrown, you can check the error message printed to the console if needed
+        System.out.println("Expected error: Product not found ID=" + product.getProductId());
+    }
+
+
+
+}

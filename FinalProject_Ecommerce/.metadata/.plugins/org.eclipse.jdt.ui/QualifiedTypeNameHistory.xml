@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.hexaware.ecom.service.CartServiceImp"/>
+    <fullyQualifiedTypeName name="com.hexaware.ecom.service.ICartService"/>
+    <fullyQualifiedTypeName name="com.hexaware.ecom.service.ICustomerService"/>
+    <fullyQualifiedTypeName name="com.hexaware.ecom.service.IOrderService"/>
+    <fullyQualifiedTypeName name="com.hexaware.ecom.service.OrderServiceImp"/>
+    <fullyQualifiedTypeName name="com.hexaware.ecom.service.IProductService"/>
+    <fullyQualifiedTypeName name="com.hexaware.ecom.service.ProductServiceImp"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+</qualifiedTypeNameHistroy>

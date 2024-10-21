@@ -1,0 +1,14 @@
+package com.hexaware.ecom.dao;
+
+import com.hexaware.ecom.entity.Cart;
+
+import java.util.List;
+
+public interface ICartDao {
+	
+	boolean dCart(Cart car);
+	int removeCart(Cart car);
+	List<Cart> getAllCart();
+	
+
+}

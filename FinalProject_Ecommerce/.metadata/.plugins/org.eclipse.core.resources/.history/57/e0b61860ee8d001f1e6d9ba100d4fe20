@@ -1,0 +1,39 @@
+package com.hexaware.ecom.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class OrderServiceImpTest {
+
+	@Test
+	void testOrderServiceImp() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testCalculateTotalPrice() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testAddOrder() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testAddOrderItems() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testValidateOrder() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetAllOrders() {
+		fail("Not yet implemented");
+	}
+
+}

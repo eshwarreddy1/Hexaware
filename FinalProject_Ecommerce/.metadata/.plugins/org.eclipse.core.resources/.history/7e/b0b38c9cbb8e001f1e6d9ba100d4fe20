@@ -1,0 +1,59 @@
+package com.hexaware.ecom.test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import com.hexaware.ecom.entity.Orders;
+import com.hexaware.ecom.entity.OrderItems;
+import com.hexaware.ecom.service.OrderServiceImp;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
+import com.hexaware.ecom.service.IOrderService;
+
+class OrderServiceImpTest {
+
+    static IOrderService orderService;
+
+    @BeforeAll
+    public static void beforeAll() {
+        orderService = new OrderServiceImp(); // Instantiate the order service
+    }
+
+    @Test
+    void testAddOrder() {
+        // Arrange: Create a sample order and order item
+        Orders order = new Orders(401, 101, LocalDate.now(), 0.0, "Test order");
+        OrderItems orderItem = new OrderItems(201, 401,301, 2); // Assuming productId 201 and quantity 2
+
+        // Mock the product price returned from the DAO layer
+        when(orderDao.getProductPrice(orderItem.getProductId())).thenReturn(250.0); // Simulating product price is 250.0
+
+        // Act: Calculate total price and add the order using the service
+        double calculatedTotalPrice = orderService.calculateTotalPrice(order, orderItem);
+        boolean isAdded = orderService.addOrder(order);
+
+        // Assert: Verify that the total price is correctly set and the order is added successfully
+        assertEquals(500.0, calculatedTotalPrice, "Total price should be 500.0"); // 250.0 * 2
+        assertTrue(isAdded, "Order added successfully");
+    }
+
+
+    @Test
+    void testAddOrderItems() {
+        // Arrange: Create a sample order item
+        OrderItems orderItem = new OrderItems(201, 101, 301, 5); // Example constructor: itemId, orderId, productId, quantity
+        
+        // Act: Add the order item using the service
+        boolean isAdded = orderService.addOrderItems(orderItem);
+
+        // Assert: Check if the order item was added successfully
+        assertTrue(isAdded, "Order item  added successfully");
+    }
+
+ 
+}

@@ -1,0 +1,10 @@
+package com.hexaware.ecom.dao;
+
+import com.hexaware.ecom.entity.Product;
+
+public interface IProductDao {
+
+	boolean createPrd(Product prd);
+	boolean removePrd(Product prd);
+	
+}

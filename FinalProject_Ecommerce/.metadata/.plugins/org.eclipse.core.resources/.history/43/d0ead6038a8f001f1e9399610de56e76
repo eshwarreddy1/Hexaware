@@ -1,0 +1,14 @@
+package com.hexaware.ecom.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class CustomerNotFoundExceptionTest {
+
+	@Test
+	void testCustomerNotFoundException() {
+		fail("Not yet implemented");
+	}
+
+}

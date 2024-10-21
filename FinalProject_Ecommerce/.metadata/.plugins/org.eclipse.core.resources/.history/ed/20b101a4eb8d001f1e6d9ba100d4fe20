@@ -1,0 +1,51 @@
+package com.hexaware.ecom.test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import com.hexaware.ecom.entity.Product;
+import com.hexaware.ecom.service.ProductServiceImp;
+import com.hexaware.ecom.service.IProductService;
+
+class ProductServiceImpTest {
+
+    static IProductService productService;
+
+    @BeforeAll
+    public static void beforeAll() {
+        productService = new ProductServiceImp(); // Instantiate service
+    }
+
+    @Test
+    @Disabled
+    void testCreatePrd() {
+        // Arrange: Create a sample product
+        Product product = new Product(201, "Test Product", 100.0, 50, 20);
+
+        // Act: Call the service's createPrd method
+        int result = productService.createPrd(product);
+
+        // Assert: Check if the creation result is 1 (success)
+        assertTrue(result > 0, "Product creation should be successful");
+    }
+
+  
+    @Test
+    void testValidatePrd() {
+        // Arrange: Create a valid product
+        Product validProduct = new Product(201, "Test Product", 100.0, 50);
+
+        // Act: Call the validation method
+        boolean isValid = ProductServiceImp.vaildatePrd(validProduct);
+
+        // Assert: Check if the product is valid
+        assertTrue(isValid, "Product validation should pass for a valid product");
+    }
+
+ 
+}

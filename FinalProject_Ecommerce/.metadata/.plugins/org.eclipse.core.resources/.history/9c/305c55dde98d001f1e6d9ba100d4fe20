@@ -1,0 +1,19 @@
+package com.hexaware.ecom.test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class ProductServiceImpTest {
+
+	@Test
+	void testCreatePrd() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testVaildatePrd() {
+		fail("Not yet implemented");
+	}
+
+}

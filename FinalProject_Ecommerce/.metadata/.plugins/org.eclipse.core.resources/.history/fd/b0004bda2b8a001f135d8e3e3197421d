@@ -1,0 +1,108 @@
+package com.hexaware.ecom.service;
+
+import java.util.List;
+
+
+import com.hexaware.ecom.dao.IOrderDao;
+import com.hexaware.ecom.dao.OrderDaoImp;
+import com.hexaware.ecom.entity.OrderItems;
+import com.hexaware.ecom.entity.Orders;
+import com.hexaware.ecom.entity.Product;
+
+public class OrderServiceImp implements IOrderService {
+
+	
+    private IOrderDao orderDao;
+    
+	public OrderServiceImp() {
+		
+		orderDao = new OrderDaoImp();	
+	}
+
+
+	@Override
+	public int addOrder(Orders order) {
+		
+		return orderDao.addOrder(order);
+	}
+	
+
+	@Override
+	public int addOrderItems(OrderItems orderItem) {
+		
+		return orderDao.addOrderItems(orderItem);
+	}
+
+	
+	
+    // Method to calculate and set the total price in the order object
+	/*
+	 * public static void calculateAndSetTotalPrice(Orders order, List<OrderItems>
+	 * orderItemsList, List<Product> productList) { double totalPrice = 0.0;
+	 * 
+	 * // Loop through order items and products to calculate the total price for
+	 * (OrderItems orderItem : orderItemsList) { for (Product product : productList)
+	 * { if (product.getProductId() == orderItem.getProductId()) { // Match product
+	 * and order item by productId double productPrice = product.getPrice(); // Get
+	 * product price int quantity = orderItem.getQuantity(); // Get quantity from
+	 * user input
+	 * 
+	 * // Log for debugging purposes System.out.println("Product ID: " +
+	 * product.getProductId() + ", Price: " + productPrice + ", Quantity: " +
+	 * quantity);
+	 * 
+	 * totalPrice += productPrice * quantity; // Calculate total price for the
+	 * current product break; // Exit the inner loop once the product is matched } }
+	 * }
+	 
+	
+	
+
+	    // Log total price before setting it to the order
+	    System.out.println("Total Price Calculated: " + totalPrice);
+
+	    // Set the total price in the order
+	    order.setTotalPrice(totalPrice);
+	}
+	*/
+	
+	public static  double calculateTotalPrice(Orders order, OrderItems orderItem, List<Product> productList) {
+	    double totalPrice = 0.0;
+         System.out.println("hai i am here ----------");
+	    // Loop through each OrderItem
+	   
+	        // Find the product corresponding to the productId in the OrderItem
+	        for (Product product : productList) {
+	            if (product.getProductId() == orderItem.getProductId()) { 
+	                totalPrice += product.getPrice() * orderItem.getQuantity(); // Calculate total price
+	                break; // Exit the loop once the product is found
+	            }
+	        }
+	    
+	    System.out.println("---------did you get the sol-----------------");
+	    // Set the total price in the order object
+	    order.setTotalPrice(totalPrice);
+System.out.println("did you get the sol-----------------");
+	    return totalPrice;
+	}
+	
+	
+	public static  boolean validateOrder(OrderItems ordItm) {
+		
+		boolean flag = false;
+		if(ordItm.getQuantity()>0) {
+			flag = true;
+		}
+		return flag;
+	}
+
+
+	@Override
+	public List<Orders> getAllOrders(int customerId) {
+		
+		return orderDao.getAllOrders(customerId);
+	}
+
+	
+	
+}

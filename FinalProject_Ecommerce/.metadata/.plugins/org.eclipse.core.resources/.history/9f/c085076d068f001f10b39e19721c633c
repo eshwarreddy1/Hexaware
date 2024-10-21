@@ -1,0 +1,77 @@
+package com.hexaware.ecom.service;
+
+import java.util.List;
+
+
+import com.hexaware.ecom.dao.IOrderDao;
+import com.hexaware.ecom.dao.OrderDaoImp;
+import com.hexaware.ecom.entity.OrderItems;
+import com.hexaware.ecom.entity.Orders;
+
+
+public class OrderServiceImp implements IOrderService {
+
+	
+    private IOrderDao orderDao;
+    
+	public OrderServiceImp() {
+		
+		orderDao = new OrderDaoImp();	
+	}
+
+	
+	public  double calculateTotalPrice(Orders order, OrderItems orderItem) {
+	    double totalPrice = 0.0;
+
+	    // Fetch product price from the DAO layer
+	    double productPrice = orderDao.getProductPrice(orderItem.getProductId());
+
+
+	    // Multiply price by quantity
+	    totalPrice = productPrice * orderItem.getQuantity();
+
+	    // Set the total price in the Orders object
+	    order.setTotalPrice(totalPrice);
+
+	    return totalPrice;
+	}
+
+
+	@Override
+	public boolean addOrder(Orders order) {
+		
+		return orderDao.addOrder(order);
+	}
+	
+
+	@Override
+	public boolean addOrderItems(OrderItems orderItem) {
+		
+		return orderDao.addOrderItems(orderItem);
+	}
+
+	
+	
+ 
+	
+
+	
+	public static  boolean validateOrder(OrderItems ordItm) {
+		
+		boolean flag = false;
+		if(ordItm.getQuantity()>0) {
+			flag = true;
+		}
+		return flag;
+	}
+
+
+	@Override
+	public List<Orders> getAllOrders(int customerId) {
+		
+		return orderDao.getAllOrders(customerId);
+	}
+
+	
+	
+}
